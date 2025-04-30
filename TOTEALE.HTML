@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>COOL FLOW</title>
+  <style>
+    /* Fire Background Styles */
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      color: #fff;
+      scroll-behavior: smooth;
+      overflow: hidden;
+      background: black;
+    }
+
+    canvas#fireCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    header {
+      background-color: rgba(0, 0, 0, 0.6);
+      height: 300px;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-shadow: 2px 2px 4px #000;
+    }
+
+    header h1 {
+      font-size: 3em;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 20px;
+    }
+
+    nav {
+      background-color: #111;
+      overflow: hidden;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav a {
+      float: left;
+      display: block;
+      color: #fff;
+      text-align: center;
+      padding: 14px 20px;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      background-color: #ff4500;
+      color: black;
+    }
+
+    .content {
+      max-width: 900px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    .section {
+      padding: 30px;
+      margin-bottom: 40px;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-left: 5px solid #ff4500;
+    }
+
+    .section h2 {
+      color: #ff6347;
+    }
+
+    .section p {
+      line-height: 1.6;
+      font-size: 1.1em;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #111;
+      color: white;
+    }
+
+    .contact-info {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    .contact-info h2 {
+      color: #ff6347;
+    }
+
+    .contact-info a {
+      color: #ffa;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+
+    .videos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .videos iframe {
+      width: 560px;
+      height: 315px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="fireCanvas"></canvas>
+
+<nav>
+  <a href="#top">Home</a>
+  <a href="#about">About Us</a>
+  <a href="#videos">Videos</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<header>
+  <h1>COOL FLOW</h1>
+</header>
+
+<div class="content">
+  <div class="section" id="about">
+    <h2>COOL FLOW</h2>
+    <p>
+      Cool Flow is an incredibly talented band that seamlessly blends diverse genres to create a sound that’s both fresh and timeless. Their unique ability to fuse powerful rhythms, captivating melodies, and soul-stirring lyrics makes every performance a musical journey you won’t want to miss. Whether they’re delivering high-energy tracks or intimate, emotionally charged ballads, Cool Flow's talent shines through in every note.
+    </p>
+  </div>
+
+  <div class="section" id="sonnet">
+    <h2>ABOUT COOL FLOW</h2>
+    <p>
+      Cool Flow is a rising band hailing from Rosemont Hills Montessori College. Known for their unique fusion of diverse genres, they create an unforgettable musical experience that resonates with fans of all ages. Whether it's high-energy tracks or soulful ballads, their performances captivate audiences with every note.
+    </p>
+  </div>
+
+  <div class="section" id="videos">
+    <h2>Cool Flow's Videos</h2>
+    <p>Check out some amazing videos from Cool Flow's YouTube channel!</p>
+    <div class="videos">
+      <iframe src="https://www.youtube.com/embed/We9mnZbDhoQ" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/7rF5GPmnW8I" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/x5LQUjHMmy8" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/wIRTwfkQnNw" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/P06jNVR43zY" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <div class="section" id="contact">
+    <h2>Contact Cool Flow</h2>
+    <div class="contact-info">
+      <h2>Contact Information</h2>
+      <p><strong>Facebook:</strong> <a href="http://facebook.com/CoolFlow27" target="_blank">Cool Flow on Facebook</a></p>
+      <p><strong>YouTube:</strong> <a href="https://www.youtube.com/@coolflow27" target="_blank">Cool Flow on YouTube</a></p>
+      <p><strong>Email:</strong> <a href="mailto:hga_hem@yahoo.com">hga_hem@yahoo.com</a></p>
+      <p><strong>Phone:</strong> 0915 510 7130</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  &copy; COOL FLOW | ENJOY MUSIC TOGETHER
+</footer>
+
+<!-- 🔥 FIRE PARTICLE SCRIPT -->
+<script>
+const canvas = document.getElementById('fireCanvas');
+const ctx = canvas.getContext('2d');
+let w = canvas.width = window.innerWidth;
+let h = canvas.height = window.innerHeight;
+
+window.addEventListener('resize', () => {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+});
+
+let particles = [];
+
+function Particle() {
+  this.x = Math.random() * w;
+  this.y = h + Math.random() * 100;
+  this.vx = (Math.random() - 0.5) * 2;
+  this.vy = -Math.random() * 4 - 2;
+  this.size = Math.random() * 3 + 2;
+  this.life = 100;
+  this.color = `hsl(${Math.random() * 30}, 100%, 50%)`;
+}
+
+function draw() {
+  ctx.fillStyle = 'rgba(0,0,0,0.1)';
+  ctx.fillRect(0, 0, w, h);
+
+  if (particles.length < 300) {
+    particles.push(new Particle());
+  }
+
+  for (let i = 0; i < particles.length; i++) {
+    let p = particles[i];
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fillStyle = p.color;
+    ctx.fill();
+    p.x += p.vx;
+    p.y += p.vy;
+    p.life--;
+    p.size *= 0.98;
+
+    if (p.life <= 0 || p.size <= 0.5) {
+      particles.splice(i, 1);
+      i--;
+    }
+  }
+
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
+
+</body>
+</html>
